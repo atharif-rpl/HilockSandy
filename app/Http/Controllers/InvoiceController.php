@@ -40,19 +40,27 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        // Generate Invoice Number: JSGI-INV-YYMM-XXXX (misalnya)
+        // Format waktu saat ini: YYMM, misalnya 2505
         $yearMonth = Carbon::now()->format('ym');
-        $latestInvoice = Invoice::where('invoice_number', 'LIKE', "JSGI-INV-{$yearMonth}-%")->orderBy('invoice_number', 'desc')->first();
 
-        $nextNumber = 1;
+        // Cari invoice terakhir di bulan ini yang sesuai prefix
+        $latestInvoice = Invoice::where('invoice_number', 'LIKE', "atha-INV-{$yearMonth}-%")
+                                ->orderBy('invoice_number', 'desc')->first();
+
+        $nextNumber = 1; // Default nomor awal
         if ($latestInvoice) {
+            // Ambil 4 digit terakhir dari invoice_number sebagai angka urutan
             $lastNumStr = substr($latestInvoice->invoice_number, -4);
-            $nextNumber = intval($lastNumStr) + 1;
+            $nextNumber = intval($lastNumStr) + 1; // Tambah satu untuk invoice baru
         }
-        $invoiceNumber = "JSGI-INV-{$yearMonth}-" . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
 
+        // Buat invoice number baru: "atha-INV-2505-0001"
+        $invoiceNumber = "atha-INV-{$yearMonth}-" . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+
+        // Kirim ke view create form
         return view('invoices.create', compact('invoiceNumber'));
     }
+
 
     /**
      * Store a newly created resource in storage.

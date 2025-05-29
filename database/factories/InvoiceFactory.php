@@ -22,7 +22,7 @@ class InvoiceFactory extends Factory
         $sequence = str_pad($invoiceCounter[$yearMonth], 4, '0', STR_PAD_LEFT);
 
         return [
-            'invoice_number' => 'JSGI-INV-' . $yearMonth . '-' . $sequence,
+            'invoice_number' => 'ZulaIK-INV-' . $yearMonth . '-' . $sequence,
             'customer_name' => $this->faker->company,
             'delivery_date' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
             'submit_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
