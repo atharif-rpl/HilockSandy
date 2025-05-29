@@ -1,0 +1,34 @@
+runtime: php84 # Atau php81, php74, dll. Pilih versi PHP yang kamu gunakan.
+
+# Jika aplikasi kamu ada di subdirektori, misalnya 'public' untuk Laravel
+# document_root: public
+
+# Jika kamu mau semua request diarahkan ke satu file (misal index.php untuk routing)
+entrypoint: serve index.php # Untuk PHP native atau framework yg pakai front controller
+
+# Jika kamu pakai Laravel atau framework lain yang entrypointnya ada di public/index.php
+# entrypoint: serve public/index.php
+
+# Untuk mengaktifkan ekstensi PHP yang dibutuhkan (opsional)
+# runtime_config:
+#   php_extensions:
+#     - apcu
+#     - bcmath
+#     - bz2
+#     - calendar
+#     - exif
+#     - gd
+#     - intl
+#     - mbstring
+#     - memcached
+#     - mysqli
+#     - opcache
+#     - pdo_mysql
+#     - pdo_pgsql
+#     - imagick
+#     - zip
+
+# Environment variables (opsional, lebih aman pakai Secret Manager untuk data sensitif)
+# env_variables:
+#   APP_KEY: 'Your_App_Key' # Contoh untuk Laravel
+#   DB_HOST: 'Your_DB_Host'
